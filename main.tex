@@ -1,5 +1,5 @@
 \documentclass[aspectratio=169]{beamer}
-\usepackage[T1]{fontenc} 
+\usepackage[T1]{fontenc}
 \usepackage[default]{sourcesanspro}
 \usepackage{newtxsf}
 \usepackage{hyperref}
@@ -19,11 +19,11 @@
 
 \author{Yan Lin}
 \title{AI Systems \& Infrastructure}
-\subtitle{MODULE NAME}
+\subtitle{Module A.1: API Fundamentals}
 \institute{%
     \href{https://www.yanlincs.com}{www.yanlincs.com}
 }
-\date{DATE}
+\date{September 1st, 2026}
 \usepackage{AAU}
 % \AtBeginSection{}  % Remove section title slides
 \AtBeginSubsection{}  % Remove subsection title slides
@@ -42,7 +42,7 @@
 \setbeamercolor{normal text}{fg=textgrey}
 \usebeamercolor[fg]{normal text}
 
-\def\emphasis#1{\color{aaured}#1}
+\def\emphasis#1{{\color{aaured}\textbf{#1}}}
 \renewcommand{\thefootnote}{}
 
 
@@ -57,7 +57,7 @@
     frame=shadowbox,
 }
 
-%- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+%- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 \begin{document}
 
 \begin{frame}[plain,noframenumbering]
@@ -70,18 +70,475 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}    
+\begin{frame}
 \tableofcontents[sectionstyle=show,
 subsectionstyle=show/shaded/hide,
 subsubsectionstyle=show/shaded/hide]
 \end{frame}
 
 
-\section{}
+\section{Why APIs}
 
-\begin{frame}{}
+\begin{frame}{Interactions are everywhere}
+\textbf{Interactions} are common in both \textit{human society} and the \textit{digital world}.
+\begin{enumerate}
+\item We as humans interact with each other through language to communicate our thoughts and purposes.
+\item In the digital world, a food delivery application interacts with restaurants to process your order and interacts with banks to ensure payment for the meal.
+\end{enumerate}
+
+Interactions between applications, AI or not, are what build the digital world we cannot live without.
+
+\vspace{0.5em}
+\emphasis{The question.} How do applications interact with each other?
 \end{frame}
 
+\begin{frame}{One model, many faces}
+\only<1>{
+    ChatGPT can be accessed through OpenAI's official website, their mobile and desktop apps, and other applications with AI functionalities, all through the same family of interfaces OpenAI has published.
+}
+\only<2>{
+    OpenAI does not write specific code for each application to interact with their APIs.
+    They \textit{standardize their APIs}, and as long as other programs adhere to the standard, the interactions work.
+}
+
+    \begin{figure}[htpb]
+        \begin{center}
+            \includegraphics[width=0.7\textwidth]{chatgpt-example}
+        \end{center}
+    \end{figure}
+
+\only<1>{
+    These are all \emphasis{Application Programming Interfaces (APIs)}.
+}
+\only<2>{
+    In this module we cover the fundamental concepts for understanding and using APIs, and get hands-on experience with how APIs work in practice.
+}
+\end{frame}
+
+
+\section{Network Fundamentals}
+
+\begin{frame}{Sending a letter, sending a request}
+\textbf{Sending a letter} needs a \textit{geographical address}. \textbf{Communicating through APIs} needs a \textit{network address}.
+
+    \begin{figure}[htpb]
+        \begin{center}
+            \begin{subfigure}{0.4\textwidth}
+                \includegraphics[width=\textwidth]{home_address}
+                \caption{Geographical address}
+            \end{subfigure}
+            \hspace{0.05\textwidth}
+            \begin{subfigure}{0.4\textwidth}
+                \includegraphics[width=\textwidth]{network_address}
+                \caption{Network address}
+            \end{subfigure}
+        \end{center}
+    \end{figure}
+
+\emphasis{Four core concepts:} IP addresses, domains, URLs, and ports.
+\end{frame}
+
+\begin{frame}[fragile]{IP address}
+    \begin{block}{IP address}
+\textbf{A unique identifier} assigned to each device connected to a network.
+        \begin{itemize}
+            \item Think of it as a street address such as \textit{Fredrik Bajers Vej 7K, 9220 Aalborg East}
+            \item An IPv4 address looks like \texttt{65.108.210.169}
+        \end{itemize}
+    \end{block}
+
+    \vspace{0.5em}
+    Technically speaking, APIs can be reached solely by IP addresses.
+
+    However, IP addresses are difficult for humans to read and remember.
+\end{frame}
+
+\begin{frame}[fragile]{Domain}
+    \begin{block}{Domain}
+\textbf{A unique identifier} pointing to some network resource, with \textit{one or more corresponding IP addresses}.
+        \begin{itemize}
+            \item Like a shorter, semantically rich name such as \textit{Aalborg University}
+            \item ChatGPT's API has the domain \texttt{api.openai.com}, currently pointing to two IP addresses \texttt{162.159.140.245} and \texttt{172.66.0.243}
+        \end{itemize}
+    \end{block}
+
+    \vspace{0.5em}
+    Technically, the network still uses IP addresses under the hood, translating domain on the fly.
+
+    But we as human use domains to identify APIs in most cases.
+\end{frame}
+
+\begin{frame}[fragile]{URL}
+    \begin{block}{URL (Uniform Resource Locator)}
+A URL always contains a \textbf{domain} and adds the \textbf{protocol} along with a \textbf{path} to a specific resource or function.
+        \begin{minted}{text}
+https://api.openai.com/v1/responses
+        \end{minted}
+        Specifies the communication protocol (\texttt{https}), the domain name (\texttt{api.openai.com}), the API version (v1), and the specific function (generating model responses).
+    \end{block}
+
+Think of the domain as the \textit{building address}. The full URL is the address with \textit{floor and room number}, plus the chosen \textit{delivery company}.
+\end{frame}
+
+\begin{frame}{Port}
+    \begin{block}{Port}
+An identifier for which \textbf{specific application} should receive an incoming message.
+        \begin{itemize}
+            \item Computers run multiple applications simultaneously, each with its own corresponding mailbox
+            \item Each IP address can have up to 65,535 ports
+            \item Default ports are assigned to common services. HTTPS-based APIs usually run on port \texttt{443}
+        \end{itemize}
+    \end{block}
+
+    Typically we do not have to specify a port when calling an API.
+\end{frame}
+
+
+\begin{frame}{Network address, all together}
+\begin{minipage}[t]{0.47\textwidth}
+    \begin{itemize}
+        \item Domain points to one or more IP addresses
+        \item URL extends the domain with protocol and path
+        \item Port picks the right application on the target device
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.5\textwidth}
+    \begin{figure}[htpb]
+        \begin{center}
+            \includegraphics[width=0.9\textwidth]{three_pillars}
+        \end{center}
+    \end{figure}
+\end{minipage}
+
+
+\end{frame}
+
+
+\section{HTTP Protocol}
+
+\begin{frame}{Picking a postal service}
+A URL specifies a \textbf{protocol}, the rules for how the communication should happen.
+
+Conceptually similar to choosing a \textit{postal service} and a \textit{delivery method} when sending a letter.
+
+    \begin{itemize}
+        \item Real life: pick a postal service like PostNord or DAO, then a specific delivery method
+        \item APIs: pick a protocol, then a method within that protocol
+    \end{itemize}
+
+    For now we focus on the one protocol used in most APIs, \emphasis{HTTP (HyperText Transfer Protocol)}.
+\end{frame}
+
+\begin{frame}{Request and response}
+HTTP follows the \textbf{request-response model}.
+
+    \begin{figure}[htpb]
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{http_reqresp}
+        \end{center}
+    \end{figure}
+
+\begin{enumerate}
+\item A communication always starts with a sender application \textit{sending an HTTP request} to a recipient.
+\item After the recipient receives and processes the request, it \textit{sends an HTTP response back} to the sender, and the communication ends there.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{HTTP request, three parts}
+    On top of the request-response model, HTTP standardizes how a request should be formatted, similar to how a letter should be addressed and sealed.
+
+    \begin{block}{Request line}
+        A single line that summarizes the intent of the request, similar to the front of a letter.
+    \end{block}
+
+    \begin{block}{Headers}
+        Key-value pairs that carry metadata about the request, like who is sending it and what format the data is in, similar to envelope information.
+    \end{block}
+
+    \begin{block}{Body}
+        The main content of the request, similar to the letter itself.
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Request line}
+    A single line that summarizes the intent of the request, similar to the front of a letter.
+
+    \begin{block}{Example}
+        \begin{minted}{http}
+POST https://api.openai.com/v1/responses HTTP/1.1
+        \end{minted}
+    \end{block}
+
+    Three parts, separated by spaces.
+    \begin{itemize}
+        \item HTTP method, here \texttt{POST}
+        \item Target URL
+        \item Protocol version, almost always left at the default
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Two HTTP methods we will use a lot}
+    \begin{block}{\texttt{GET}}
+        The sender wants to retrieve information.
+        \begin{itemize}
+            \item \texttt{GET https://api.openai.com/v1/models} checks OpenAI's available AI models
+            \item Like sending an inquiry letter to your landlord asking for information
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{\texttt{POST}}
+        The sender wants to send some data and expect a response corresponding to that data.
+        \begin{itemize}
+            \item \texttt{POST https://api.openai.com/v1/responses} sends a prompt and returns the model's answer
+            \item Like sending a blueprint to a manufacturer expecting them to send a prototype back
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Headers}
+    Key information on the envelope of a letter. not the letter itself, but essential details for proper delivery and processing.
+
+    \begin{block}{Example}
+        \begin{minted}{http}
+Authorization: Bearer sk-abc1234567890qwerty
+Content-Type: application/json
+Accept: application/json
+User-Agent: SomeAIApp/1.0
+        \end{minted}
+    \end{block}
+
+    \begin{itemize}
+        \item \texttt{Authorization} identifies the user and protects the API
+        \item \texttt{Content-Type} and \texttt{Accept} specify the format of data we send and expect back
+        \item \texttt{User-Agent} identifies the application or client
+    \end{itemize}
+
+    What fields to include depends on the specific API we are trying to communicate with.
+\end{frame}
+
+\begin{frame}[fragile]{Body}
+    The content of the request, used with \texttt{POST} method that send data.
+    The format is declared in \texttt{Content-Type}.
+    JSON is the more common choice for AI APIs.
+
+    \begin{block}{Example body for OpenAI's response API}
+        \begin{minted}{json}
+{
+    "model": "gpt-5.5",
+    "input": [
+        {"role": "user", "content": "Write a haiku about APIs"}
+    ],
+    "temperature": 0.7,
+    "max_output_tokens": 50
+}
+        \end{minted}
+    \end{block}
+
+    The keys and structure are defined by the API.
+    Read the documentation before you send.
+\end{frame}
+
+\begin{frame}{HTTP response, three parts}
+    Under the request-response model of HTTP, we expect a response from the recipient after sending the request.
+
+    Similar to real life, if everything is working correctly, we receive a response letter from the actual recipient.
+    If not, the postal service lets us know what went wrong.
+
+    \begin{block}{Status line}
+        A single line summarizing the outcome of the request.
+    \end{block}
+
+    \begin{block}{Headers}
+        Key-value metadata about the response.
+    \end{block}
+
+    \begin{block}{Body}
+        The actual data the API provider sends back.
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Status line and status code}
+    A single line summarizing the outcome of the request.
+
+    \begin{block}{Example}
+        \begin{minted}{http}
+HTTP/1.1 200 OK
+        \end{minted}
+    \end{block}
+
+    Three parts, separated by spaces.
+    \begin{itemize}
+        \item Composed of HTTP protocol version, status code, and reason phrase
+        \item Both status code and reason phrase provide immediate information about the outcome
+        \item Common codes: \texttt{200 OK}, \texttt{400 Bad Request}, \texttt{401 Unauthorized}, and \texttt{404 Not Found}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Response headers}
+    Key-value metadata about the response.
+
+    \begin{block}{Example}
+        \begin{minted}{http}
+Content-Type: application/json
+Content-Length: 1247
+        \end{minted}
+    \end{block}
+
+    Format and field names are defined by the API.
+\end{frame}
+
+\begin{frame}[fragile]{Body}
+    The actual data the API provider sends back.
+
+    \begin{block}{Example}
+        \begin{minted}{json}
+{
+  "id": "resp_6820f382ee1c8191bc096bee70894d04",
+  "model": "gpt-5.5",
+  "status": "completed",
+  "output_text": "
+    Endpoints whisper soft / data flows on silent threads
+    / answers softly bloom
+  ",
+}
+        \end{minted}
+    \end{block}
+
+    Format and field names are defined by the API.
+\end{frame}
+
+\begin{frame}{A note on HTTPS and other protocols}
+    \begin{block}{HTTPS}
+        Most modern APIs use HTTPS in their URLs rather than plain HTTP.
+        HTTPS is an extension of HTTP that additionally encrypts messages.
+        Think of it as writing letters in a way that only the sender and the recipient can understand. More in Module B.4.
+    \end{block}
+
+    \begin{block}{Other protocols, briefly}
+        HTTP is the predominant API protocol, but not the only one.
+        \begin{itemize}
+            \item WebSocket establishes a continuous, two-way tunnel, used by real-time voice APIs
+            \item MQTT operates on the publish-subscribe pattern, useful for sensor data
+            \item MCP (Model Context Protocol) standardizes how LLM models talk to external tools
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+
+\section{Interacting with HTTP APIs}
+
+\begin{frame}{Interact with APIs in browsers}
+    We have been interacting with APIs all the time while reading the literature of this course.
+
+    Every time you load a web page, your browser sends an HTTP \texttt{GET} request and renders the response.
+
+    \begin{figure}[htpb]
+        \begin{center}
+            \includegraphics[width=0.6\textwidth]{github-api-browser}
+        \end{center}
+        \caption*{Visiting \texttt{https://api.github.com/} with the response displayed as raw HTTP components.}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Why the browser is not enough}
+    Browsers are not built to test APIs in the first place, and there are several limitations with this method of interaction.
+
+    \begin{itemize}
+        \item No way to send a \texttt{POST} body
+        \item No way to control request headers, including \texttt{Authorization} for API keys
+        \item Unintuitive way for inspecting the raw response components
+    \end{itemize}
+
+    \vspace{0.5em}
+This is where \textbf{HTTP API testing tools} come in.
+\end{frame}
+
+\begin{frame}{API testing tools}
+    Dedicated development tools for testing HTTP APIs.
+    They let us control every detail of HTTP API-based interaction and inspect every part of the response.
+
+    \begin{figure}[htpb]
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{github-api-postman}
+        \end{center}
+        \caption*{Interacting with \texttt{https://api.github.com/} in Postman.}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Calling an AI API by hand}
+    With a testing tool we can build a real request to a real AI API, like OpenAI's chat API.
+
+    \begin{figure}[htpb]
+        \begin{center}
+            \includegraphics[width=0.55\textwidth]{openai-api-postman}
+        \end{center}
+        \caption*{Sending a request to OpenAI's API with all necessary components.}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Two practical prerequisites}
+    Before you start playing with APIs yourself, there are two things to look out for.
+
+    \begin{block}{Read the documentation first}
+Different APIs have \textit{vastly different specifications} for required headers and body format.
+        Check the documentation of the family of APIs you are going to interact with.
+    \end{block}
+
+    \begin{block}{Register and get an API key}
+AI APIs almost always \textit{require authentication}.
+        \begin{itemize}
+            \item Most platforms give a small amount of free quota to new users
+            \item Google is relatively generous, with some lighter models are usable free of charge
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+
+\section{Exercise}
+
+\begin{frame}{Interact with APIs of AI chatbots}
+    You probably have interacted with AI chatbots through their GUI applications.
+In this exercise, we get a better idea of what is happening internally by \textbf{directly interacting with the APIs}.
+
+    \begin{block}{Setup}
+        \begin{itemize}
+            \item A developer account registered under the AI platform of your choice
+            \item An API key obtained from that platform
+            \item An API testing tool such as Postman
+        \end{itemize}
+    \end{block}
+
+    Read the API documentation of your chosen provider, build a \texttt{POST} request that sends a chat message to one of their models, and find the model's reply in the response body.
+\end{frame}
+
+\begin{frame}{Pro tip and experiments}
+    \begin{block}{Pro tip}
+Most AI API documentation shows examples using the provider's official Python package by default, which \textit{hides the underlying HTTP details}.
+        Look for a programming language selector and switch to \texttt{curl}.
+        You can then extract the HTTP request specification from the example.
+    \end{block}
+
+    \begin{block}{Try these experiments and observe}
+        \begin{enumerate}
+            \item Replace the prompt with a different question. Does the response structure stay the same?
+            \item Replace the API key with an invalid key. What status code do you get?
+            \item Send a malformed JSON object. What does the error response look like?
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{What you should walk away with}
+    By the end of the exercise, you should be able to:
+    \begin{enumerate}
+        \item Locate an API given its provider and documentation
+        \item Build an HTTP request by hand with the right method, headers, and body
+        \item Handle an HTTP response and pull useful information out of it
+    \end{enumerate}
+
+    \vspace{0.5em}
+    The next module covers doing all of this from Python, so the request lives inside a real program.
+\end{frame}
 
 
 \appendix

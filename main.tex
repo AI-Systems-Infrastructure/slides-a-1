@@ -163,9 +163,9 @@ Interactions between applications, AI or not, are what build the digital world w
     \end{block}
 
     \vspace{0.5em}
-    Technically, the network still uses IP addresses under the hood, translating domain on the fly.
+    Technically, the network still uses IP addresses under the hood, translating domains on the fly.
 
-    But we as human use domains to identify APIs in most cases.
+    But we as humans use domains to identify APIs in most cases.
 \end{frame}
 
 \begin{frame}[fragile]{URL}
@@ -297,7 +297,7 @@ POST https://api.openai.com/v1/responses HTTP/1.1
 \end{frame}
 
 \begin{frame}[fragile]{Headers}
-    Key information on the envelope of a letter. not the letter itself, but essential details for proper delivery and processing.
+    Key information on the envelope of a letter, not the letter itself, but essential details for proper delivery and processing.
 
     \begin{block}{Example}
         \begin{minted}{http}
@@ -318,7 +318,7 @@ User-Agent: SomeAIApp/1.0
 \end{frame}
 
 \begin{frame}[fragile]{Body}
-    The content of the request, used with \texttt{POST} method that send data.
+    The content of the request, used with the \texttt{POST} method that sends data.
     The format is declared in \texttt{Content-Type}.
     JSON is the more common choice for AI APIs.
 
@@ -447,7 +447,7 @@ Content-Length: 1247
     \begin{itemize}
         \item No way to send a \texttt{POST} body
         \item No way to control request headers, including \texttt{Authorization} for API keys
-        \item Unintuitive way for inspecting the raw response components
+        \item Unintuitive way to inspect the raw response components
     \end{itemize}
 
     \vspace{0.5em}
@@ -489,7 +489,7 @@ Different APIs have \textit{vastly different specifications} for required header
 AI APIs almost always \textit{require authentication}.
         \begin{itemize}
             \item Most platforms give a small amount of free quota to new users
-            \item Google is relatively generous, with some lighter models are usable free of charge
+            \item Google is relatively generous, with some lighter models usable free of charge
         \end{itemize}
     \end{block}
 \end{frame}

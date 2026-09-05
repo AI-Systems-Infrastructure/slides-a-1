@@ -101,24 +101,24 @@ subsubsectionstyle=show/shaded/hide]
 Interactions between applications, AI or not, are what build the digital world we cannot live without.
 
 \vspace{0.5em}
-\emphasis{The question.} How do applications interact with each other?
+  \emphasis{How do applications interact with each other?}
 \note{
 }
 \end{frame}
 
 
-\begin{frame}{One model, many faces}
+\begin{frame}{Interactions through interfaces}
 \only<1>{
-    ChatGPT can be accessed through OpenAI's official website, their mobile and desktop apps, and other applications with AI functionalities, all through the same family of interfaces OpenAI has published.
+  ChatGPT can be accessed through all kinds of applications, all through \textit{the same family of interfaces} of ChatGPT.
 }
 \only<2>{
-    OpenAI does not write specific code for each application to interact with their APIs.
-    They \textit{standardize their APIs}, and as long as other programs adhere to the standard, the interactions work.
+    ChatGPT does not contain specific interaction logic for each application.
+    Instead, it publishes \textit{standardized APIs}, works as long as other application adhere to the standard.
 }
 
     \begin{figure}[htpb]
         \begin{center}
-            \includegraphics[width=0.7\textwidth]{chatgpt-example}
+            \includegraphics[width=0.55\textwidth]{module-a1-api-clients}
         \end{center}
     \end{figure}
 
@@ -126,7 +126,7 @@ Interactions between applications, AI or not, are what build the digital world w
     These are all \emphasis{Application Programming Interfaces (APIs)}.
 }
 \only<2>{
-    In this module we cover the fundamental concepts for understanding and using APIs, and get hands-on experience with how APIs work in practice.
+  \emphasis{This module covers:} Fundamental concepts for understanding and using APIs, hands-on experience with interactions with APIs.
 }
 \note{
 }
@@ -136,7 +136,7 @@ Interactions between applications, AI or not, are what build the digital world w
 
 \section{Network Fundamentals}
 
-\begin{frame}{Sending a letter, sending a request}
+\begin{frame}{Why network concepts?}
 \textbf{Sending a letter} needs a \textit{geographical address}. \textbf{Communicating through APIs} needs a \textit{network address}.
 
     \begin{figure}[htpb]
@@ -160,16 +160,14 @@ Interactions between applications, AI or not, are what build the digital world w
 
 
 \begin{frame}[fragile]{IP address}
-    \begin{block}{IP address}
 \textbf{A unique identifier} assigned to each device connected to a network.
         \begin{itemize}
             \item Think of it as a street address such as \textit{Fredrik Bajers Vej 7K, 9220 Aalborg East}
             \item An IPv4 address looks like \texttt{65.108.210.169}
         \end{itemize}
-    \end{block}
 
     \vspace{0.5em}
-    Technically speaking, APIs can be reached solely by IP addresses.
+    Locations in the network can be reached solely by IP addresses.
 
     However, IP addresses are difficult for humans to read and remember.
 \note{
@@ -178,55 +176,51 @@ Interactions between applications, AI or not, are what build the digital world w
 
 
 \begin{frame}[fragile]{Domain}
-    \begin{block}{Domain}
 \textbf{A unique identifier} pointing to some network resource, with \textit{one or more corresponding IP addresses}.
         \begin{itemize}
             \item Like a shorter, semantically rich name such as \textit{Aalborg University}
             \item ChatGPT's API has the domain \texttt{api.openai.com}, currently pointing to two IP addresses \texttt{162.159.140.245} and \texttt{172.66.0.243}
         \end{itemize}
-    \end{block}
 
     \vspace{0.5em}
-    Technically, the network still uses IP addresses under the hood, translating domains on the fly.
+    The network still uses IP addresses under the hood, translating domains on the fly.
 
-    But we as humans use domains to identify APIs in most cases.
+    But we as humans prefer to use domains to identify APIs.
 \note{
 }
 \end{frame}
 
 
-\begin{frame}[fragile]{URL}
-    \begin{block}{URL (Uniform Resource Locator)}
+\begin{frame}[fragile]{URL (Uniform Resource Locator)}
 A URL always contains a \textbf{domain} and adds the \textbf{protocol} along with a \textbf{path} to a specific resource or function.
         \begin{minted}{text}
 https://api.openai.com/v1/responses
         \end{minted}
-        Specifies the communication protocol (\texttt{https}), the domain name (\texttt{api.openai.com}), the API version (v1), and the specific function (generating model responses).
-    \end{block}
+        Specifies the communication protocol (\texttt{https}), the domain name (\texttt{api.openai.com}), and the function (\texttt{v1/responses}).
 
-Think of the domain as the \textit{building address}. The full URL is the address with \textit{floor and room number}, plus the chosen \textit{delivery company}.
+  \vspace{0.5em}
+If the domain is the \textit{building address}, then the URL is the full address with \textit{floor and room number} plus the chosen \textit{delivery company}.
 \note{
 }
 \end{frame}
 
 
 \begin{frame}{Port}
-    \begin{block}{Port}
 An identifier for which \textbf{specific application} should receive an incoming message.
         \begin{itemize}
             \item Computers run multiple applications simultaneously, each with its own corresponding mailbox
             \item Each IP address can have up to 65,535 ports
             \item Default ports are assigned to common services. HTTPS-based APIs usually run on port \texttt{443}
         \end{itemize}
-    \end{block}
 
-    Typically we do not have to specify a port when calling an API.
+  \vspace{0.5em}
+    Typically, we do not have to specify a port when calling an API.
 \note{
 }
 \end{frame}
 
 
-\begin{frame}{Network address, all together}
+\begin{frame}{Full network address breakdown}
 \begin{minipage}[t]{0.47\textwidth}
     \begin{itemize}
         \item Domain points to one or more IP addresses
@@ -242,7 +236,6 @@ An identifier for which \textbf{specific application} should receive an incoming
         \end{center}
     \end{figure}
 \end{minipage}
-
 
 \note{
 }

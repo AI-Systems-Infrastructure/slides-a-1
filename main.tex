@@ -114,7 +114,7 @@ Interactions between applications, AI or not, are what build the digital world w
 }
 \only<2>{
     ChatGPT does not contain specific interaction logic for each application.
-    Instead, it publishes \textit{standardized APIs}, works as long as other application adhere to the standard.
+    Instead, it publishes \textit{standardized APIs}, which work as long as other applications adhere to the standard.
 }
 
     \begin{figure}[htpb]
@@ -127,7 +127,7 @@ Interactions between applications, AI or not, are what build the digital world w
     These are all \emphasis{Application Programming Interfaces (APIs)}.
 }
 \only<2>{
-  \emphasis{This module covers:} Fundamental concepts for understanding and using APIs, hands-on experience with interactions with APIs.
+  \emphasis{This module covers:} Fundamental concepts for understanding and using APIs, and hands-on experience with interactions with APIs.
 }
 \note{
 }
@@ -248,7 +248,7 @@ An identifier for which \textbf{specific application} should receive an incoming
 \begin{minipage}[c]{0.5\textwidth}
   If you are wondering:
   \begin{itemize}
-    \item How computers find each other through network addresses?
+    \item How do computers find each other through network addresses?
     \item How are domains mapped to IP addresses?
   \end{itemize}
 
@@ -349,7 +349,7 @@ POST https://api.openai.com/v1/responses HTTP/1.1
     \end{block}
 
     \begin{block}{\texttt{POST}}
-        The sender wants to send some data and expect a response corresponding to that data.
+        The sender wants to send some data and expects a response corresponding to that data.
         \begin{itemize}
             \item \texttt{POST https://api.openai.com/v1/responses} sends a prompt and returns the model's answer
             \item Like sending a blueprint to a manufacturer expecting them to send a prototype back
@@ -373,7 +373,7 @@ User-Agent: SomeAIApp/1.0
 
     \begin{itemize}
         \item \texttt{Authorization} identifies the user and protects the API
-        \item \texttt{Content-Type} specify the format of data we send
+        \item \texttt{Content-Type} specifies the format of data we send
         \item \texttt{User-Agent} identifies the application
     \end{itemize}
 
@@ -473,7 +473,7 @@ Content-Length: 1247
   "output_text": "
     Endpoints whisper soft / data flows on silent threads
     / answers softly bloom
-  ",
+  "
 }
         \end{minted}
     \end{block}
@@ -508,15 +508,13 @@ Content-Length: 1247
 \section{Interacting with HTTP APIs}
 
 \begin{frame}{Interact with APIs in browsers}
-    We have been interacting with APIs all the time while reading the literature of this course.
-
-    Every time you load a web page, your browser sends an HTTP \texttt{GET} request and renders the response.
+    We have been interacting with APIs all the time: Every time we load a web page, our browser sends an HTTP \texttt{GET} request and renders the response.
 
     \begin{figure}[htpb]
         \begin{center}
-            \includegraphics[width=0.6\textwidth]{github-api-browser}
+            \includegraphics[width=0.7\textwidth]{github-api-browser}
         \end{center}
-        \caption*{Visiting \texttt{https://api.github.com/} with the response displayed as raw HTTP components.}
+        \caption*{Visiting an API with the response displayed as raw HTTP components.}
     \end{figure}
 \note{
 }
@@ -524,7 +522,7 @@ Content-Length: 1247
 
 
 \begin{frame}{Why the browser is not enough}
-    Browsers are not built to test APIs in the first place, and there are several limitations with this method of interaction.
+    Browsers are not built to test APIs, with several limitations.
 
     \begin{itemize}
         \item No way to send a \texttt{POST} body
@@ -541,21 +539,21 @@ This is where \textbf{HTTP API testing tools} come in.
 
 \begin{frame}{API testing tools}
     Dedicated development tools for testing HTTP APIs.
-    They let us control every detail of HTTP API-based interaction and inspect every part of the response.
 
     \begin{figure}[htpb]
         \begin{center}
-            \includegraphics[width=0.5\textwidth]{github-api-postman}
+            \includegraphics[width=0.55\textwidth]{github-api-postman}
         \end{center}
-        \caption*{Interacting with \texttt{https://api.github.com/} in Postman.}
+        \caption*{Interacting with an API in Postman.}
     \end{figure}
 \note{
+    They let us control every detail of HTTP API-based interaction and inspect every part of the response.
 }
 \end{frame}
 
 
 \begin{frame}{Calling an AI API by hand}
-    With a testing tool we can build a real request to a real AI API, like OpenAI's chat API.
+    With a testing tool we can send an HTTP request to an AI API, like OpenAI's chat API.
 
     \begin{figure}[htpb]
         \begin{center}
@@ -569,14 +567,14 @@ This is where \textbf{HTTP API testing tools} come in.
 
 
 \begin{frame}{Two practical prerequisites}
-    Before you start playing with APIs yourself, there are two things to look out for.
+  Things to look out for before interacting with an AI API.
 
-    \begin{block}{Read the documentation first}
+    \begin{block}{Read the documentation}
 Different APIs have \textit{vastly different specifications} for required headers and body format.
         Check the documentation of the family of APIs you are going to interact with.
     \end{block}
 
-    \begin{block}{Register and get an API key}
+    \begin{block}{Get an API key}
 AI APIs almost always \textit{require authentication}.
         \begin{itemize}
             \item Most platforms give a small amount of free quota to new users
@@ -592,8 +590,7 @@ AI APIs almost always \textit{require authentication}.
 \section{Exercise}
 
 \begin{frame}{Interact with APIs of AI chatbots}
-    You probably have interacted with AI chatbots through their GUI applications.
-In this exercise, we get a better idea of what is happening internally by \textbf{directly interacting with the APIs}.
+In this exercise, we will glance into the internal mechanism of AI systems by \textbf{interacting with AI APIs}.
 
     \begin{block}{Setup}
         \begin{itemize}
@@ -603,17 +600,18 @@ In this exercise, we get a better idea of what is happening internally by \textb
         \end{itemize}
     \end{block}
 
-    Read the API documentation of your chosen provider, build a \texttt{POST} request that sends a chat message to one of their models, and find the model's reply in the response body.
+    Build a \texttt{POST} request that sends a chat message to one of their models, and find the model's reply in the response body.
 \note{
+    You probably have interacted with AI chatbots through their GUI applications.
+
+In this exercise, we get a better idea of what is happening internally by directly interacting with the APIs.
 }
 \end{frame}
 
 
 \begin{frame}{Pro tip and experiments}
     \begin{block}{Pro tip}
-Most AI API documentation shows examples using the provider's official Python package by default, which \textit{hides the underlying HTTP details}.
-        Look for a programming language selector and switch to \texttt{curl}.
-        You can then extract the HTTP request specification from the example.
+      \live{How to find the hidden specification of the HTTP request on many AI platforms.}
     \end{block}
 
     \begin{block}{Try these experiments and observe}
@@ -624,21 +622,9 @@ Most AI API documentation shows examples using the provider's official Python pa
         \end{enumerate}
     \end{block}
 \note{
-}
-\end{frame}
-
-
-\begin{frame}{What you should walk away with}
-    By the end of the exercise, you should be able to:
-    \begin{enumerate}
-        \item Locate an API given its provider and documentation
-        \item Build an HTTP request by hand with the right method, headers, and body
-        \item Handle an HTTP response and pull useful information out of it
-    \end{enumerate}
-
-    \vspace{0.5em}
-    The next module covers doing all of this from Python, so the request lives inside a real program.
-\note{
+Most AI API documentation shows examples using the provider's official Python package by default, which \textit{hides the underlying HTTP details}.
+        Look for a programming language selector and switch to \texttt{curl}.
+        You can then extract the HTTP request specification from the example.
 }
 \end{frame}
 

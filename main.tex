@@ -29,6 +29,11 @@
 \AtBeginSubsection{}  % Remove subsection title slides
 \setbeamertemplate{navigation symbols}{}  % Remove bottom nav tools
 % \setbeamertemplate{headline}{}  % Remove top navbar
+\ifdefined\hidenotes\else
+    \setbeameroption{show notes on second screen=right}
+    \setbeamerfont{note page}{size=\large}
+    \hypersetup{pdfkeywords={SP-Right}}
+\fi
 
 % defs
 \def\cmd#1{\texttt{\color{red}\footnotesize $\backslash$#1}}
@@ -68,6 +73,8 @@
             \includegraphics[keepaspectratio, scale=0.5]{aau-logo-left-uk}
         \end{center}
     \end{figure}
+\note{
+}
 \end{frame}
 
 
@@ -75,6 +82,8 @@
 \tableofcontents[sectionstyle=show,
 subsectionstyle=show/shaded/hide,
 subsubsectionstyle=show/shaded/hide]
+\note{
+}
 \end{frame}
 
 
@@ -92,6 +101,8 @@ Interactions between applications, AI or not, are what build the digital world w
 
 \vspace{0.5em}
 \emphasis{The question.} How do applications interact with each other?
+\note{
+}
 \end{frame}
 
 
@@ -115,6 +126,8 @@ Interactions between applications, AI or not, are what build the digital world w
 }
 \only<2>{
     In this module we cover the fundamental concepts for understanding and using APIs, and get hands-on experience with how APIs work in practice.
+}
+\note{
 }
 \end{frame}
 
@@ -140,6 +153,8 @@ Interactions between applications, AI or not, are what build the digital world w
     \end{figure}
 
 \emphasis{Four core concepts:} IP addresses, domains, URLs, and ports.
+\note{
+}
 \end{frame}
 
 
@@ -156,6 +171,8 @@ Interactions between applications, AI or not, are what build the digital world w
     Technically speaking, APIs can be reached solely by IP addresses.
 
     However, IP addresses are difficult for humans to read and remember.
+\note{
+}
 \end{frame}
 
 
@@ -172,6 +189,8 @@ Interactions between applications, AI or not, are what build the digital world w
     Technically, the network still uses IP addresses under the hood, translating domains on the fly.
 
     But we as humans use domains to identify APIs in most cases.
+\note{
+}
 \end{frame}
 
 
@@ -185,6 +204,8 @@ https://api.openai.com/v1/responses
     \end{block}
 
 Think of the domain as the \textit{building address}. The full URL is the address with \textit{floor and room number}, plus the chosen \textit{delivery company}.
+\note{
+}
 \end{frame}
 
 
@@ -199,6 +220,8 @@ An identifier for which \textbf{specific application} should receive an incoming
     \end{block}
 
     Typically we do not have to specify a port when calling an API.
+\note{
+}
 \end{frame}
 
 
@@ -220,6 +243,8 @@ An identifier for which \textbf{specific application} should receive an incoming
 \end{minipage}
 
 
+\note{
+}
 \end{frame}
 
 
@@ -237,6 +262,8 @@ Conceptually similar to choosing a \textit{postal service} and a \textit{deliver
     \end{itemize}
 
     For now we focus on the one protocol used in most APIs, \emphasis{HTTP (HyperText Transfer Protocol)}.
+\note{
+}
 \end{frame}
 
 
@@ -253,6 +280,8 @@ HTTP follows the \textbf{request-response model}.
 \item A communication always starts with a sender application \textit{sending an HTTP request} to a recipient.
 \item After the recipient receives and processes the request, it \textit{sends an HTTP response back} to the sender, and the communication ends there.
 \end{enumerate}
+\note{
+}
 \end{frame}
 
 
@@ -270,6 +299,8 @@ HTTP follows the \textbf{request-response model}.
     \begin{block}{Body}
         The main content of the request, similar to the letter itself.
     \end{block}
+\note{
+}
 \end{frame}
 
 
@@ -288,6 +319,8 @@ POST https://api.openai.com/v1/responses HTTP/1.1
         \item Target URL
         \item Protocol version, almost always left at the default
     \end{itemize}
+\note{
+}
 \end{frame}
 
 
@@ -307,6 +340,8 @@ POST https://api.openai.com/v1/responses HTTP/1.1
             \item Like sending a blueprint to a manufacturer expecting them to send a prototype back
         \end{itemize}
     \end{block}
+\note{
+}
 \end{frame}
 
 
@@ -329,6 +364,8 @@ User-Agent: SomeAIApp/1.0
     \end{itemize}
 
     What fields to include depends on the specific API we are trying to communicate with.
+\note{
+}
 \end{frame}
 
 
@@ -352,6 +389,8 @@ User-Agent: SomeAIApp/1.0
 
     The keys and structure are defined by the API.
     Read the documentation before you send.
+\note{
+}
 \end{frame}
 
 
@@ -372,6 +411,8 @@ User-Agent: SomeAIApp/1.0
     \begin{block}{Body}
         The actual data the API provider sends back.
     \end{block}
+\note{
+}
 \end{frame}
 
 
@@ -390,6 +431,8 @@ HTTP/1.1 200 OK
         \item Both status code and reason phrase provide immediate information about the outcome
         \item Common codes: \texttt{200 OK}, \texttt{400 Bad Request}, \texttt{401 Unauthorized}, and \texttt{404 Not Found}
     \end{itemize}
+\note{
+}
 \end{frame}
 
 
@@ -404,6 +447,8 @@ Content-Length: 1247
     \end{block}
 
     Format and field names are defined by the API.
+\note{
+}
 \end{frame}
 
 
@@ -425,6 +470,8 @@ Content-Length: 1247
     \end{block}
 
     Format and field names are defined by the API.
+\note{
+}
 \end{frame}
 
 
@@ -443,6 +490,8 @@ Content-Length: 1247
             \item MCP (Model Context Protocol) standardizes how LLM models talk to external tools
         \end{itemize}
     \end{block}
+\note{
+}
 \end{frame}
 
 
@@ -460,6 +509,8 @@ Content-Length: 1247
         \end{center}
         \caption*{Visiting \texttt{https://api.github.com/} with the response displayed as raw HTTP components.}
     \end{figure}
+\note{
+}
 \end{frame}
 
 
@@ -474,6 +525,8 @@ Content-Length: 1247
 
     \vspace{0.5em}
 This is where \textbf{HTTP API testing tools} come in.
+\note{
+}
 \end{frame}
 
 
@@ -487,6 +540,8 @@ This is where \textbf{HTTP API testing tools} come in.
         \end{center}
         \caption*{Interacting with \texttt{https://api.github.com/} in Postman.}
     \end{figure}
+\note{
+}
 \end{frame}
 
 
@@ -499,6 +554,8 @@ This is where \textbf{HTTP API testing tools} come in.
         \end{center}
         \caption*{Sending a request to OpenAI's API with all necessary components.}
     \end{figure}
+\note{
+}
 \end{frame}
 
 
@@ -517,6 +574,8 @@ AI APIs almost always \textit{require authentication}.
             \item Google is relatively generous, with some lighter models usable free of charge
         \end{itemize}
     \end{block}
+\note{
+}
 \end{frame}
 
 
@@ -536,6 +595,8 @@ In this exercise, we get a better idea of what is happening internally by \textb
     \end{block}
 
     Read the API documentation of your chosen provider, build a \texttt{POST} request that sends a chat message to one of their models, and find the model's reply in the response body.
+\note{
+}
 \end{frame}
 
 
@@ -553,6 +614,8 @@ Most AI API documentation shows examples using the provider's official Python pa
             \item Send a malformed JSON object. What does the error response look like?
         \end{enumerate}
     \end{block}
+\note{
+}
 \end{frame}
 
 
@@ -566,6 +629,8 @@ Most AI API documentation shows examples using the provider's official Python pa
 
     \vspace{0.5em}
     The next module covers doing all of this from Python, so the request lives inside a real program.
+\note{
+}
 \end{frame}
 
 
@@ -580,6 +645,8 @@ Most AI API documentation shows examples using the provider's official Python pa
 {\small \faEnvelope\ \href{mailto:lyan@cs.aau.dk}{lyan@cs.aau.dk} \\
 \faGlobe\ \href{https://www.yanlincs.com}{www.yanlincs.com}}
 \end{center}
+\note{
+}
 \end{frame}
 
 \end{document}

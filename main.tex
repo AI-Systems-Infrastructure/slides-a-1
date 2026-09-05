@@ -243,7 +243,23 @@ An identifier for which \textbf{specific application} should receive an incoming
 }
 \end{frame}
 
-% TODO: A slide about other computer network stuff
+
+\begin{frame}{Deeper computer network concepts}[extended]
+\begin{minipage}[c]{0.5\textwidth}
+  If you are wondering:
+  \begin{itemize}
+    \item How computers find each other through network addresses?
+    \item How are domains mapped to IP addresses?
+  \end{itemize}
+
+  Check out the extended reading block in the literature.
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.47\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{module-a1-osi-model}
+\end{minipage}
+\end{frame}
 
 
 
@@ -468,7 +484,7 @@ Content-Length: 1247
 \end{frame}
 
 
-\begin{frame}{A note on HTTPS and other protocols}
+\begin{frame}{A note on HTTPS and other protocols}[extended]
     \begin{block}{HTTPS}
         Most modern APIs use HTTPS in their URLs rather than plain HTTP.
         HTTPS is an extension of HTTP that additionally encrypts messages.
@@ -478,9 +494,9 @@ Content-Length: 1247
     \begin{block}{Other protocols}
         HTTP is the predominant API protocol, but not the only one.
         \begin{itemize}
-            \item WebSocket establishes a continuous, two-way tunnel, used by real-time voice APIs
-            \item MQTT operates on the publish-subscribe pattern, useful for sensor data
-            \item MCP (Model Context Protocol) standardizes how LLM models talk to external tools
+          \item \textbf{WebSocket} establishes a continuous, two-way tunnel, used by real-time voice APIs
+          \item \textbf{MQTT} operates on the publish-subscribe pattern, useful for sensor data
+          \item \textbf{MCP} (Model Context Protocol) standardizes how LLM models talk to external tools
         \end{itemize}
     \end{block}
 \note{

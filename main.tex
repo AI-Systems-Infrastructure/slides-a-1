@@ -70,11 +70,13 @@
     \end{figure}
 \end{frame}
 
+
 \begin{frame}
 \tableofcontents[sectionstyle=show,
 subsectionstyle=show/shaded/hide,
 subsubsectionstyle=show/shaded/hide]
 \end{frame}
+
 
 
 \section{Why APIs}
@@ -91,6 +93,7 @@ Interactions between applications, AI or not, are what build the digital world w
 \vspace{0.5em}
 \emphasis{The question.} How do applications interact with each other?
 \end{frame}
+
 
 \begin{frame}{One model, many faces}
 \only<1>{
@@ -116,6 +119,7 @@ Interactions between applications, AI or not, are what build the digital world w
 \end{frame}
 
 
+
 \section{Network Fundamentals}
 
 \begin{frame}{Sending a letter, sending a request}
@@ -138,6 +142,7 @@ Interactions between applications, AI or not, are what build the digital world w
 \emphasis{Four core concepts:} IP addresses, domains, URLs, and ports.
 \end{frame}
 
+
 \begin{frame}[fragile]{IP address}
     \begin{block}{IP address}
 \textbf{A unique identifier} assigned to each device connected to a network.
@@ -152,6 +157,7 @@ Interactions between applications, AI or not, are what build the digital world w
 
     However, IP addresses are difficult for humans to read and remember.
 \end{frame}
+
 
 \begin{frame}[fragile]{Domain}
     \begin{block}{Domain}
@@ -168,6 +174,7 @@ Interactions between applications, AI or not, are what build the digital world w
     But we as humans use domains to identify APIs in most cases.
 \end{frame}
 
+
 \begin{frame}[fragile]{URL}
     \begin{block}{URL (Uniform Resource Locator)}
 A URL always contains a \textbf{domain} and adds the \textbf{protocol} along with a \textbf{path} to a specific resource or function.
@@ -179,6 +186,7 @@ https://api.openai.com/v1/responses
 
 Think of the domain as the \textit{building address}. The full URL is the address with \textit{floor and room number}, plus the chosen \textit{delivery company}.
 \end{frame}
+
 
 \begin{frame}{Port}
     \begin{block}{Port}
@@ -215,6 +223,7 @@ An identifier for which \textbf{specific application} should receive an incoming
 \end{frame}
 
 
+
 \section{HTTP Protocol}
 
 \begin{frame}{Picking a postal service}
@@ -229,6 +238,7 @@ Conceptually similar to choosing a \textit{postal service} and a \textit{deliver
 
     For now we focus on the one protocol used in most APIs, \emphasis{HTTP (HyperText Transfer Protocol)}.
 \end{frame}
+
 
 \begin{frame}{Request and response}
 HTTP follows the \textbf{request-response model}.
@@ -245,6 +255,7 @@ HTTP follows the \textbf{request-response model}.
 \end{enumerate}
 \end{frame}
 
+
 \begin{frame}{HTTP request, three parts}
     On top of the request-response model, HTTP standardizes how a request should be formatted, similar to how a letter should be addressed and sealed.
 
@@ -260,6 +271,7 @@ HTTP follows the \textbf{request-response model}.
         The main content of the request, similar to the letter itself.
     \end{block}
 \end{frame}
+
 
 \begin{frame}[fragile]{Request line}
     A single line that summarizes the intent of the request, similar to the front of a letter.
@@ -278,6 +290,7 @@ POST https://api.openai.com/v1/responses HTTP/1.1
     \end{itemize}
 \end{frame}
 
+
 \begin{frame}{Two HTTP methods we will use a lot}
     \begin{block}{\texttt{GET}}
         The sender wants to retrieve information.
@@ -295,6 +308,7 @@ POST https://api.openai.com/v1/responses HTTP/1.1
         \end{itemize}
     \end{block}
 \end{frame}
+
 
 \begin{frame}[fragile]{Headers}
     Key information on the envelope of a letter, not the letter itself, but essential details for proper delivery and processing.
@@ -316,6 +330,7 @@ User-Agent: SomeAIApp/1.0
 
     What fields to include depends on the specific API we are trying to communicate with.
 \end{frame}
+
 
 \begin{frame}[fragile]{Body}
     The content of the request, used with the \texttt{POST} method that sends data.
@@ -339,6 +354,7 @@ User-Agent: SomeAIApp/1.0
     Read the documentation before you send.
 \end{frame}
 
+
 \begin{frame}{HTTP response, three parts}
     Under the request-response model of HTTP, we expect a response from the recipient after sending the request.
 
@@ -358,6 +374,7 @@ User-Agent: SomeAIApp/1.0
     \end{block}
 \end{frame}
 
+
 \begin{frame}[fragile]{Status line and status code}
     A single line summarizing the outcome of the request.
 
@@ -375,6 +392,7 @@ HTTP/1.1 200 OK
     \end{itemize}
 \end{frame}
 
+
 \begin{frame}[fragile]{Response headers}
     Key-value metadata about the response.
 
@@ -387,6 +405,7 @@ Content-Length: 1247
 
     Format and field names are defined by the API.
 \end{frame}
+
 
 \begin{frame}[fragile]{Body}
     The actual data the API provider sends back.
@@ -408,6 +427,7 @@ Content-Length: 1247
     Format and field names are defined by the API.
 \end{frame}
 
+
 \begin{frame}{A note on HTTPS and other protocols}
     \begin{block}{HTTPS}
         Most modern APIs use HTTPS in their URLs rather than plain HTTP.
@@ -426,6 +446,7 @@ Content-Length: 1247
 \end{frame}
 
 
+
 \section{Interacting with HTTP APIs}
 
 \begin{frame}{Interact with APIs in browsers}
@@ -441,6 +462,7 @@ Content-Length: 1247
     \end{figure}
 \end{frame}
 
+
 \begin{frame}{Why the browser is not enough}
     Browsers are not built to test APIs in the first place, and there are several limitations with this method of interaction.
 
@@ -454,6 +476,7 @@ Content-Length: 1247
 This is where \textbf{HTTP API testing tools} come in.
 \end{frame}
 
+
 \begin{frame}{API testing tools}
     Dedicated development tools for testing HTTP APIs.
     They let us control every detail of HTTP API-based interaction and inspect every part of the response.
@@ -466,6 +489,7 @@ This is where \textbf{HTTP API testing tools} come in.
     \end{figure}
 \end{frame}
 
+
 \begin{frame}{Calling an AI API by hand}
     With a testing tool we can build a real request to a real AI API, like OpenAI's chat API.
 
@@ -476,6 +500,7 @@ This is where \textbf{HTTP API testing tools} come in.
         \caption*{Sending a request to OpenAI's API with all necessary components.}
     \end{figure}
 \end{frame}
+
 
 \begin{frame}{Two practical prerequisites}
     Before you start playing with APIs yourself, there are two things to look out for.
@@ -495,6 +520,7 @@ AI APIs almost always \textit{require authentication}.
 \end{frame}
 
 
+
 \section{Exercise}
 
 \begin{frame}{Interact with APIs of AI chatbots}
@@ -512,6 +538,7 @@ In this exercise, we get a better idea of what is happening internally by \textb
     Read the API documentation of your chosen provider, build a \texttt{POST} request that sends a chat message to one of their models, and find the model's reply in the response body.
 \end{frame}
 
+
 \begin{frame}{Pro tip and experiments}
     \begin{block}{Pro tip}
 Most AI API documentation shows examples using the provider's official Python package by default, which \textit{hides the underlying HTTP details}.
@@ -528,6 +555,7 @@ Most AI API documentation shows examples using the provider's official Python pa
     \end{block}
 \end{frame}
 
+
 \begin{frame}{What you should walk away with}
     By the end of the exercise, you should be able to:
     \begin{enumerate}
@@ -539,6 +567,7 @@ Most AI API documentation shows examples using the provider's official Python pa
     \vspace{0.5em}
     The next module covers doing all of this from Python, so the request lives inside a real program.
 \end{frame}
+
 
 
 \appendix
